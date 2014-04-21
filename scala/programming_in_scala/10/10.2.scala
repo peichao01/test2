@@ -17,6 +17,8 @@ class LineElement(s: String) extends ArrayElement(Array(s)) {
 	override def height = 1
 }
 
+class LineElement2(s: String) 
+
 //////////////////////////////
 
 class Cat{
@@ -32,3 +34,12 @@ class Tiger (
 	override val dangerous: Boolean,
 	private var age: Int
 ) extends Cat
+
+class UniformElement(
+	ch: Char
+	override val width: Int,
+	override val height: Int
+) extends Element(
+	private val line = ch.toString * width
+	def contents = Array.make(height, line)
+)

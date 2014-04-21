@@ -1,9 +1,3 @@
-<!doctype html>
-<html>
-<head></head>
-<body>
-<script>
-
 Function.prototype.curried = function(argsLength){
      var self = this, len = argsLength === undefined ? self.length : argsLength;
      if(len > 0){
@@ -58,7 +52,3 @@ Function.prototype.curried = function(argsLength){
      var p2 = p1(2);
 
 //})();
-
-</script>
-</body>
-</html>
