@@ -1,10 +1,10 @@
 function trait (konstructor, traits) {
 	function Constructor(){
-		konstructor.call(this);
+		konstructor.apply(this, arguments);
 	}
-	function _trait(reciever, trait, parentName){
-		for(var methodName in trait){
-			var method = trait[methodName];
+	function _trait(reciever, __trait, parentName){
+		for(var methodName in __trait){
+			var method = __trait[methodName];
 			if(typeof method == 'function' && method.toString().indexOf(parentName) > -1) {
 				if (typeof reciever[methodName] !== 'function') throw new TypeError("reciever method("+methodName+") is not a function.");
 				var baseMethod = reciever[methodName] || function(){};
@@ -24,13 +24,14 @@ function trait (konstructor, traits) {
 	for(var key in konstructor.prototype){
 		Constructor.prototype[key] = konstructor.prototype[key];
 	}
-	for(var i = 0, len = arguments.length; i < len; i++){	
+	for(var i = 1, len = arguments.length; i < len; i++){	
 		_trait(Constructor.prototype, arguments[i], 'super');
 	}
 	return Constructor;
 }
 
-function BasicIntQueue(){
+function BasicIntQueue(name){
+	this.name = name;
 	this._buf = [];
 }
 BasicIntQueue.prototype.get = function(){
@@ -42,23 +43,23 @@ BasicIntQueue.prototype.put = function(x){
 
 var trait_Doubling = {
 	put: function(x){
-		this['super'](2 * x);
+		this.super(2 * x);
 	}
 };
 var trait_Incrementing = {
 	put: function(x){
-		this['super'](x + 1);
+		this.super(x + 1);
 	}
 };
 var trait_Filtering = {
 	put: function(x){
-		if(x >= 0) this['super'](x);
+		if(x >= 0) this.super(x);
 	}
 };
 
 var Klass = trait(BasicIntQueue, trait_Doubling, trait_Incrementing, trait_Filtering);
-var queue = new Klass();
-var queue1 = new BasicIntQueue();
+var queue = new Klass('Klass');
+var queue1 = new BasicIntQueue('BasicIntQueue');
 
 queue1.put(-1);
 
