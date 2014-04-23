@@ -1,32 +1,40 @@
 function trait (konstructor, traits) {
-	function Constructor(){
-		konstructor.apply(this, arguments);
-	}
-	function _trait(reciever, __trait, parentName){
-		for(var methodName in __trait){
-			var method = __trait[methodName];
-			if(typeof method == 'function' && method.toString().indexOf(parentName) > -1) {
-				if (typeof reciever[methodName] !== 'function') throw new TypeError("reciever method("+methodName+") is not a function.");
-				var baseMethod = reciever[methodName] || function(){};
-				reciever[methodName] = function(){
-					var baseSaved = this[parentName];
-					this[parentName] = baseMethod;
-					var result = method.apply(this, arguments);
-					this[parentName] = baseSaved;
-					return result;
-				};
-			}
-			else {
-				reciever[methodName] = method;
+	traits = [].slice.call(arguments, 1);
+	function _trait(reciever, trait_, parentName){
+		for(var methodName in trait_){
+			if(reciever.hasOwnProperty(methodName)){
+				var method = trait_[methodName];
+				if((typeof method == 'function') && 
+					(typeof reciever[methodName] == 'function') &&
+					(method.toString().indexOf(parentName) > -1)) {
+					var baseMethod = reciever[methodName];
+					reciever[methodName] = function(){
+						var baseSaved = this[parentName];
+						this[parentName] = baseMethod;
+						var result = method.apply(this, arguments);
+						this[parentName] = baseSaved;
+						return result;
+					};
+				}
+				else {
+					reciever[methodName] = method;
+				}
 			}
 		}
 	}
+	function mixinTrait (reciever) {
+		for(var i = 0, len = traits.length; i < len; i++){	
+			_trait(reciever, traits[i], 'super');
+		}
+	}
+	function Constructor(){
+		konstructor.apply(this, arguments);
+		mixinTrait(this);
+	}
 	for(var key in konstructor.prototype){
-		Constructor.prototype[key] = konstructor.prototype[key];
+		if(konstructor.prototype.hasOwnProperty(key)) Constructor.prototype[key] = konstructor.prototype[key];
 	}
-	for(var i = 1, len = arguments.length; i < len; i++){	
-		_trait(Constructor.prototype, arguments[i], 'super');
-	}
+	mixinTrait(Constructor.prototype);
 	return Constructor;
 }
 
@@ -40,6 +48,18 @@ BasicIntQueue.prototype.get = function(){
 BasicIntQueue.prototype.put = function(x){
 	this._buf.push(x);
 };
+function BasicIntQueue2(name){
+	this.name = name;
+	this._buf = [];
+
+	this.get = function(){
+		return this._buf.shift();
+	};
+
+	this.put = function(x){
+		this._buf.push(x);
+	};
+}
 
 var trait_Doubling = {
 	put: function(x){
@@ -57,7 +77,7 @@ var trait_Filtering = {
 	}
 };
 
-var Klass = trait(BasicIntQueue, trait_Doubling, trait_Incrementing, trait_Filtering);
+var Klass = trait(BasicIntQueue2, trait_Doubling, trait_Incrementing, trait_Filtering);
 var queue = new Klass('Klass');
 var queue1 = new BasicIntQueue('BasicIntQueue');
 
@@ -67,6 +87,6 @@ queue.put(-1);
 queue.put(0);
 queue.put(1);
 
-console.log(queue.get());
-console.log(queue.get());
-console.log(queue.get());
+console.log(queue.get()); // 2
+console.log(queue.get()); // 4
+console.log(queue.get()); // undefined
