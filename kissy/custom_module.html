@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="http://g.tbcdn.cn/kissy/k/1.4.2/seed-min.js"></script>
+	</head>
+	<body>
+	<div id="button-container">
+	</div>
+<script>
+
+///======================== 1 begin
+KISSY.add('my/dialog', function (S) {
+	function Dialog () { }
+	Dialog.sayHello = function () {
+		console.log("Hi!");
+	}
+	return Dialog;
+});
+KISSY.use('my/dialog', function (S, Dialog) {
+	Dialog.sayHello();
+});
+
+KISSY.add('my/popupmanager', function (S, Dialog) {
+	return {
+		popup: function (msg) {
+			console.log('notice, i am popup!\n' + msg);
+		}
+	}
+}, {
+	requires: ['my/dialog']
+});
+KISSY.use('my/popupmanager', function (S, PopupManger) {
+	PopupManger.popup("Hello, KISSY!");
+});
+///======================== 1 end
+
+KISSY.config({
+	packages: {
+		"module": {
+			tag: "20140505",
+			//base: "http://localhost:8181",
+			base: "./",
+			charset: "utf-8"
+		}
+	}
+});
+
+// KISSY.use('./opLotto, node, event', function(S, OP, Node, Event) {
+// 	S.ready(function (S) {
+// 		var $ = Node.all;
+// 		OP.init();
+// 	});
+// });
+
+KISSY.use("button", function (S, Button) {
+	var btn = new Button({
+		content: "i am a button",
+		render: "#button-container",
+		tooltip: "display when hover"
+	});
+	btn.render();
+})
+
+</script>
+	</body>
+</html>

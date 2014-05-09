@@ -5,7 +5,11 @@
 	</head>
 	<body>
 <script>
+KISSY.config('combine', true);
 
+KISSY.use('gallery/offline/1.1/index', function  (S, Offline) {
+	var offline = new Offline();
+});
 </script>
 	</body>
 </html>

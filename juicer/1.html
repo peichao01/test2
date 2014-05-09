@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src="juicer-min.js"></script>
+		<script src="1.js"></script>
+	</head>
+	<body>
+		<script type="text/juicer" id="sub-tpl">
+		"I'm sub content, ${name}"
+		</script>
+		<script>
+var tpl = 'Hi, {@include "#sub-tpl", subData}, End.';
+
+console.log(juicer(tpl, {
+	subData: {
+		name: 'juicer'
+	}
+}));
+
+console.log(juicer(
+	'Hi, {@include subTpl, "sub-data"}, End.',
+	{
+		'subTpl': "I'm sub content, ${name}",
+		'sub-data': {
+			name: "juicer"
+		}
+	}
+));
+
+		</script>
+	</body>
+</html>
