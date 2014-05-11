@@ -1,10 +1,9 @@
 // node js
-var posStart = 0;
-var posEnd = function(size){ return size - 1 };
 function List(){
 	this.listSize = 0;
-	this.pos = posStart;
+	this.pos = 0;
 	this.dataStore = [];
+
 	this.append = append;
 	this.find = find;
 	this.remove = remove;
@@ -18,9 +17,16 @@ function List(){
 	this.prev = prev;
 	this.next = next;
 	this.currPos = currPos;
-	this.realPos = realPos;
 	this.moveTo = moveTo;
+	this.inRange = inRange;
 	this.getElement = getElement;
+
+	this.resetFront = resetFront;
+	this.resetEnd = resetEnd;
+	// prev 到头的次数
+	this._front = this.resetFront();
+	// next 到底的次数
+	this._end = this.resetEnd();
 }
 
 function append(element){
@@ -69,6 +75,7 @@ function clear(){
 	this.dataStore = [];
 	this.listSize = 0;
 	this.front();
+	this.resetFront().resetEnd();
 }
 
 function contains(element){
@@ -76,39 +83,60 @@ function contains(element){
 }
 
 function front(){
-	this.pos = posStart;
+	this.pos = 0;
+	this.resetFront().resetEnd();
 }
 
 function end(){
-	this.pos = posEnd(this.listSize);
+	this.pos = this.listSize - 1;
+	this.resetFront().resetEnd();
 }
 
 function prev(){
-	// 多减一个，pos可能为 -1
-	if(this.pos >= 0) --this.pos;
+	if(this.pos > 0) {
+		--this.pos;
+		this.resetFront().resetEnd();
+	}
+	else{
+		this._front++;
+	}
 }
 
 function next(){
-	// 多加一个，pos可能为length
-	if(this.pos <= this.listSize - 1) ++this.pos;
+	if(this.pos < this.listSize - 1) {
+		++this.pos;
+		this.resetFront().resetEnd();
+	}
+	else{
+		this._end++;
+	}
 }
 
 function currPos(){
-	//return this.pos;
-	// 把超出的结果调整过来
-	return this.pos < 0 ? 0 : this.pos >= this.listSize ? this.listSize - 1 : this.pos;
-}
-
-function realPos(){
 	return this.pos;
 }
 
 function moveTo(position){
 	this.pos = position;
+	this.resetFront().resetEnd();
+}
+
+function inRange(){
+	return this._front < 1 && this._end < 1  && this.pos > -1 && this.pos < this.listSize;
 }
 
 function getElement(){
-	return this.dataStore[this.currPos()];
+	return this.dataStore[this.pos];
+}
+
+function resetFront(){
+	this._front = 0;
+	return this;
+}
+
+function resetEnd(){
+	this._end = 0;
+	return this;
 }
 
 module.exports = List;

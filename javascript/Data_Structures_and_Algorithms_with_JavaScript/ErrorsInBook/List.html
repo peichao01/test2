@@ -1,4 +1,8 @@
-
+<!DOCTYPE html>
+<html>
+<body>
+<h1>chapter 3 List</h1>
+<h3 style="color:red">View Error in Console</h3>
 <script>
 function List() {
    this.listSize = 0;
@@ -123,13 +127,15 @@ names.append("Danny");
 
 var i = 0;
 for(names.front(); names.currPos() < names.length(); names.next()) {
-	if(i++ > 100) break;
+   if(i++ > 100) break;
    console.log(names.getElement());
 }
 
 var j = 0;
 for(names.end(); names.currPos() >= 0; names.prev()) {
-	if(j++ > 100) break;
+   if(j++ > 100) break;
    console.log(names.getElement());
 }
 </script>
+</body>
+</html>
