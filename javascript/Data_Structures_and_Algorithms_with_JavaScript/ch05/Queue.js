@@ -26,6 +26,12 @@ Queue.prototype.front = function(){
 Queue.prototype.back = function(){
 	return this.dataStore[this.dataStore.length - 1];
 };
+Queue.prototype.each = function(fn){
+	var j = 0;
+	for(var i = this._front, len = this.dataStore.length; i < len; i++){
+		fn(this.dataStore[i], j++, this.dataStore, i);
+	}
+};
 Queue.prototype.toString = function(){
 	var front = this._front;
 	return this.dataStore.filter(function(el,i){
@@ -33,7 +39,11 @@ Queue.prototype.toString = function(){
 	}).join('\n');
 };
 Queue.prototype.empty = function(){
-	return this.dataStore.length - 1 <= this._front;
+	return this.dataStore.length <= this._front;
+};
+
+Queue.prototype.count = function(){
+	return this.dataStore.length - this._front;
 };
 
 module.exports = Queue;
