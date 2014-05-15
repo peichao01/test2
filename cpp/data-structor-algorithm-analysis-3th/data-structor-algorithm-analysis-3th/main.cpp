@@ -7,12 +7,18 @@
 //
 
 #include <iostream>
+#include "1.3.1.h"
+#include "1.4.h"
 
 int main(int argc, const char * argv[])
 {
 
     // insert code here...
-    std::cout << "Hello, World!\n";
+//    std::cout << "Hello, World!\n";
+    
+//    test_1_3_1();
+    test_1_4();
+    
     return 0;
 }
 

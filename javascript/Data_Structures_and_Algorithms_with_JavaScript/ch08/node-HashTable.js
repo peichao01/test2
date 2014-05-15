@@ -5,7 +5,8 @@ function HashTable(){
 }
 
 HashTable.prototype.put = function(data){
-	var pos = this.simpleHash(data);
+	//var pos = this.simpleHash(data);
+	var pos = this.betterHash(data);
 	this.table[pos] = data;
 };
 
@@ -18,13 +19,15 @@ HashTable.prototype.simpleHash = function(data){
 	return total % this.table.length;
 };
 
-HashTable.prototype.betterHash(string, arr){
+HashTable.prototype.betterHash = function(string){
 	const H = 37;
 	var total = 0;
 	for(var i = 0; i < string.length; i++){
 		total += H * total + string.charCodeAt(i);
 	}
-	total = total % arr.length;
+	total = total % this.table.length;
+	if(total < 0)
+		total += this.table.length;
 	return parseInt(total);
 };
 

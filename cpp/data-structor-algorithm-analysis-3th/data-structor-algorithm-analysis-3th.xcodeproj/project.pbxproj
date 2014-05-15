@@ -7,8 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77B107C31923CFC300FBA1CA /* 1.4.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77B107C11923CFC300FBA1CA /* 1.4.cpp */; };
+		77B107C61924C33800FBA1CA /* IntCell.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77B107C41924C33800FBA1CA /* IntCell.cpp */; };
 		77FE40B21923362400B49DD4 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77FE40B11923362400B49DD4 /* main.cpp */; };
 		77FE40B41923362400B49DD4 /* data_structor_algorithm_analysis_3th.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 77FE40B31923362400B49DD4 /* data_structor_algorithm_analysis_3th.1 */; };
+		77FE40BC1923368C00B49DD4 /* 1.3.1.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 77FE40BA1923368C00B49DD4 /* 1.3.1.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,9 +28,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		77B107C11923CFC300FBA1CA /* 1.4.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = 1.4.cpp; sourceTree = "<group>"; };
+		77B107C21923CFC300FBA1CA /* 1.4.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 1.4.h; sourceTree = "<group>"; };
+		77B107C41924C33800FBA1CA /* IntCell.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = IntCell.cpp; sourceTree = "<group>"; };
+		77B107C51924C33800FBA1CA /* IntCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntCell.h; sourceTree = "<group>"; };
 		77FE40AE1923362400B49DD4 /* data-structor-algorithm-analysis-3th */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "data-structor-algorithm-analysis-3th"; sourceTree = BUILT_PRODUCTS_DIR; };
 		77FE40B11923362400B49DD4 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		77FE40B31923362400B49DD4 /* data_structor_algorithm_analysis_3th.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = data_structor_algorithm_analysis_3th.1; sourceTree = "<group>"; };
+		77FE40BA1923368C00B49DD4 /* 1.3.1.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = 1.3.1.cpp; sourceTree = "<group>"; };
+		77FE40BB1923368C00B49DD4 /* 1.3.1.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 1.3.1.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +71,12 @@
 			children = (
 				77FE40B11923362400B49DD4 /* main.cpp */,
 				77FE40B31923362400B49DD4 /* data_structor_algorithm_analysis_3th.1 */,
+				77FE40BA1923368C00B49DD4 /* 1.3.1.cpp */,
+				77FE40BB1923368C00B49DD4 /* 1.3.1.h */,
+				77B107C11923CFC300FBA1CA /* 1.4.cpp */,
+				77B107C21923CFC300FBA1CA /* 1.4.h */,
+				77B107C41924C33800FBA1CA /* IntCell.cpp */,
+				77B107C51924C33800FBA1CA /* IntCell.h */,
 			);
 			path = "data-structor-algorithm-analysis-3th";
 			sourceTree = "<group>";
@@ -117,7 +132,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77B107C31923CFC300FBA1CA /* 1.4.cpp in Sources */,
 				77FE40B21923362400B49DD4 /* main.cpp in Sources */,
+				77FE40BC1923368C00B49DD4 /* 1.3.1.cpp in Sources */,
+				77B107C61924C33800FBA1CA /* IntCell.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,6 +245,7 @@
 				77FE40B91923362400B49DD4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

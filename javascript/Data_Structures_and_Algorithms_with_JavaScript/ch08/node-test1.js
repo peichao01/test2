@@ -1,4 +1,4 @@
-// spider monkey js
+// node js
 var HashTable = require('./node-HashTable');
 var someNames = ["David", "Jennifer", "Donnie", "Raymond", 
 			"Cynthia", "Mike", "Clayton", "Danny", "Jonathan"];
