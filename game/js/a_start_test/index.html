@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="./index.css">
+	</head>
+	<body>
+		<div id="container">
+		</div>
+		<div id="pannel">
+			<div>
+				<p><button id="start">开始</button></p>
+				<p>
+					操作：
+					<select name="op" id="op">
+						<option value="0">无</option>
+						<option value="1">添加</option>
+						<option value="2">删除</option>
+					</select>
+				</p>
+				<p>当前操作对象：<span id="op-tar"></span></p>
+			</div>
+		</div>
+		<script type="text/javascript">
+		var GAME = {
+			config: {
+				blockWidth: 50,
+				blockHeight: 50,
+				countRow: 10, //行
+				countCol: 10  //列
+			}
+		};
+		</script>
+		<script type="text/javascript" src="./scripts/EventEmitter.js"></script>
+		<script type="text/javascript">
+		GAME.EventEmitter.mixTo(GAME.event = {});
+		</script>
+		<script type="text/javascript" src="./scripts/inherit.js"></script>
+		<script type="text/javascript" src="./scripts/util.js"></script>
+		<script type="text/javascript" src="./scripts/tap.js"></script>
+		<script type="text/javascript" src="./scripts/Timer.js"></script>
+		<script type="text/javascript" src="./scripts/Block.js"></script>
+		<script type="text/javascript" src="./scripts/Cat.js"></script>
+		<script type="text/javascript" src="./scripts/Bone.js"></script>
+		<script type="text/javascript" src="./scripts/Tile.js"></script>
+		<script type="text/javascript" src="./scripts/Road.js"></script>
+		<script type="text/javascript" src="./scripts/Map.js"></script>
+		<script type="text/javascript" src="./scripts/main.js"></script>
+	</body>
+</html>

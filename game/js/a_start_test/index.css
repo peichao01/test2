@@ -1,0 +1,38 @@
+#container{
+	position: relative;
+	float: left;
+	width: 500px;/*50 x 10*/
+	height: 500px;
+	border-top: 1px solid #fdc;
+	border-left: 1px solid #fdc;
+	background-color: #fee;
+}
+
+.block{
+	position: absolute;
+	width: 49px;
+	height: 49px;
+	border-right: 1px solid #fdc;
+	border-bottom: 1px solid #fdc;
+	background-color: #fbe;
+}
+.cat{
+	background-color: #ff9;
+}
+.bone{
+	background-color: #fff;
+}
+.tile{
+	background-color: #999;
+}
+.road{
+	background-color: #b96;
+}
+
+#pannel{
+	float: left;
+	margin-left: 10px;
+}
+#pannel .block{
+	position: static;
+}
