@@ -77,14 +77,24 @@ KISSY.add('router/m', function (S, history) {
 			fn = reg;
 			reg = [];
 		}
-		var patterns = path.split('/').filter(function (part) { return part !== '' });
-		var len = patterns.length;
-		this.routing[len] = this.routing[len] || [];
-		this.routing[len].push({
-			patterns: patterns,
-			reg: reg,
-			fn: fn
-		});
+		if(typeof path === 'string'){
+			var patterns = path.split('/').filter(function (part) { return part !== '' });
+			var len = patterns.length;
+			this.routing[len] = this.routing[len] || [];
+			this.routing[len].push({
+				patterns: patterns,
+				reg: reg,
+				fn: fn
+			});
+		}
+		// RegExp
+		else{
+			this.routing['reg'] = this.routing['reg'] || [];
+			this.routing['reg'].push({
+				reg: path,
+				fn: fn
+			});
+		}
 
 		return this;
 	};
@@ -95,6 +105,7 @@ KISSY.add('router/m', function (S, history) {
 	};
 
 	Router.prototype.navigate = function(url, triggerRoute) {
+		triggerRoute = triggerRoute === void 0 ? true : triggerRoute;
 		_triggerRoute = triggerRoute;
 		location.hash = url;
 		return this;
@@ -114,7 +125,7 @@ KISSY.add('router/m', function (S, history) {
 		var paths = pathObj.pathname.split('/').filter(function (p) {return p !== ''});
 		var length = paths.length;
 		var listeners = router.routing[length];
-		var matched = [];
+		var matched = [], regMatch;
 		if (listeners) {
 			outter:
 			for(var i = 0, len = listeners.length; i < len; i++){
@@ -140,13 +151,23 @@ KISSY.add('router/m', function (S, history) {
 				matched.push(match);
 			}
 		}
+		if(router.routing.reg){
+			router.routing.reg.forEach(function (rout) {
+				var r = pathObj.pathname.match(rout.reg);
+				if(r){
+					regMatch = true;
+					r.shift();
+					rout.fn.apply(null, [pathObj].concat(r));
+				}
+			});
+		}
 		
 		if(matched.length){
 			matched.forEach(function(match){
 				match.fn.apply(null, [pathObj].concat(match.args));
 			});
 		}
-		else{
+		else if(!regMatch){
 			var result = router.otherwiseFn && (typeof router.otherwiseFn === 'function' ? router.otherwiseFn(pathObj) : router.otherwiseFn);
 			if(result && result.redirectTo){
 				router.navigate(result.redirectTo);

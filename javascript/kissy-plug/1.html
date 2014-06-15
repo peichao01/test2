@@ -15,6 +15,7 @@
 			<li><a href="#/bbb">#/bbb</a></li>
 			<li><a href="#/ccc?catid=222">#/ccc?catid=222</a></li>
 			<li><a href="#/ddd">#/ddd</a></li>
+			<li><a href="#/eee">#/eee</a></li>
 			<li><a href="#/cat/124">#/cat/124</a></li>
 			<li><a href="#/cat/photo">#/cat/photo</a></li>
 		</ul>
@@ -47,12 +48,18 @@
 		.on('/cat/:name', [/[a-zA-Z]+/], function (path, catName) {
 			console.log('catName', path, catName);
 		})
+		.on(/^\/cat\/(\d+)$/, function (path, catId) {
+			console.log('reg catId', path, catId);
+		})
+		.on(/^\/eee$/, function (path) {
+			console.log(path);
+		})
 		.otherwise(function (path) {
 			console.log('otherwise',path);
-			// return {
-			// 	redirectTo: '/cat/123'
-			// }
-			router.navigate('/cat/123', false);
+			return {
+				redirectTo: '/cat/123'
+			}
+			// router.navigate('/cat/123', false);
 		});
 		history.start();
 	});
