@@ -1,0 +1,75 @@
+<!doctype html>
+<html>
+	<head>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script>
+function MyImage(src, fn) {
+	var self = this;
+	var img = new Image();
+	this.stack = [];
+	img.onload = function(e) {
+		self.isload = true;
+		self.e = e;
+		var fn;
+		while(fn = self.stack.shift()){
+			fn.call(self, e);
+		}
+	};
+	img.src = src;
+	this.image = img;
+}
+MyImage.prototype.onload = function (fn) {
+	if(this.isload) {
+		fn.call(this, this.e);
+	}
+	else{
+		this.stack.push(fn);
+	}
+};
+
+function sprite (options) {
+	var that = {};
+
+	that.context = options.context;
+	that.width = options.width;
+	that.height = options.height;
+	that.image = options.image;
+
+	that.render = function () {
+		that.context.drawImage(
+			that.image.image,
+			0,
+			0,
+			that.width,
+			that.height,
+			0,
+			0,
+			that.width,
+			that.height
+		);
+	};
+
+	return that;
+}
+
+var canvas = document.getElementById('canvas');
+canvas.width = 100;
+canvas.height = 100;
+
+var coinImage = new MyImage("images/coin-sprite-animation-sprite-sheet.png");
+var coin = sprite({
+	context: canvas.getContext('2d'),
+	width: 100,
+	height: 100,
+	image: coinImage
+});
+
+coin.image.onload(function (e) {
+	coin.render();
+});
+
+		</script>
+	</body>
+</html>

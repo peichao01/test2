@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8">
+		<script src="http://www.peichao01.com/static_content/ctrip/script/lib/avalon.js"></script>
+		<script>
+		var rand = function () {return Math.round(Math.random() * 255)}
+		var model = avalon.define('test', function (vm) {
+			vm.color = "green";
+			vm.clickfn = function () {
+				// vm.color = '#' + (Math.random() * 0xffffff<<0).toString(16);
+				vm.color = 'rgb('+rand()+','+rand()+','+rand()+')';
+			};
+		})
+		</script>
+	</head>
+	<body>
+		<div ms-controller="test">
+			<div style="width:200px;height:200px;" ms-css-background="color"></div>
+			<button type="button" ms-click="clickfn">每点我一次都改变颜色</button>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ms-css</title>
+		<meta charset="utf8">
+		<meta name="fragment" content="!">
+		<script src="http://www.peichao01.com/static_content/ctrip/script/lib/avalon/avalon.js"></script>
+		<!--
+		<script src="http://www.peichao01.com/static_content/ctrip/script/lib/avalon-plug/mmRouter.js"></script>
+		-->
+		<script>
+		require('mmRouter', function () {
+			var model = avalon.define('xxx', function (vm) {
+				vm.currPath = '';
+			});
+
+			avalon.router.get('/aaa', function () {
+				// console.log(a);
+				console.log(this);
+				model.currPath = this.path;
+			});
+			avalon.router.get('/bbb', function () {
+				model.currPath = this.path;
+			});
+			avalon.router.get('/ccc', function () {
+				model.currPath = this.path;
+			});
+			avalon.router.get('/ddd/:ddd', function (a) {
+				avalon.log(a);
+				model.currPath = this.path;
+			});
+			avalon.router.get('/eee', function () {
+				model.currPath = this.path;
+			});
+			avalon.router.get('/items/:item(/:type)(/:color)', function (item, type, color) {
+				model.currPath = this.path;
+				console.log(item, type, color);
+			});
+			// avalon.router.get('/layer/:item(/type/:id)', function (item, type, id) {
+			// 	model.currPath = this.path;
+			// 	console.log(item, type, id);
+			// });
+			avalon.history.start({
+				// basepath: '/router.html',　　 //从哪里开始截取要监听的URL部分，默认是去掉域名部分
+				// html5Mode: false,　 //使用HTML5模式
+				// hashPrefix: "!",   //如果是使用Hashbang模式，则在hash后加一个!
+				// interval: 50,       //在IE6，7，我们需要创建iframe来产生历史，需要用一个定时器来轮询比较
+				// domain: ""         // 如果设置了域名，需要在iframe也要指定相同的域名
+				// basepath:'/mvvm'
+			});
+			// avalon.log(avalon.router.getLatelyPath());
+
+			avalon.scan();
+		});
+		</script>
+	</head>
+	<body>
+		<div ms-controller="xxx">
+			<ul>
+				<li><a href="#/aaa">#/aaa</a></li>
+				<li><a href="#/bbb">#/bbb</a></li>
+				<li><a href="#/ccc">#/ccc</a></li>
+				<li><a href="#/ddd/222">#/ddd</a></li>
+				<li><a href="#/eee">#/eee</a></li>
+				<li><a href="#/items/3242">#/items/3242</a></li>
+				<li><a href="#/items/3242/type">#/items/3242/type</a></li>
+				<li><a href="#/items/3242/type/orange">#/items/3242/type/orange</a></li>
+			</ul>
+			<div style="color:red">{{currPath}}</div>
+			<div style="height:600px;width:1px;"></div>
+		</div>
+	</body>
+</html>

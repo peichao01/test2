@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>avalon</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <script src="http://files.cnblogs.com/rubylouvre/avalon20130929.js"></script>
+        <script>
+            var model = avalon.define("test", function(vm) {
+                vm.toggle = true
+                vm.click = function(){
+                    vm.toggle = !vm.toggle
+                }
+                vm.text = "捉迷藏"
+                // alert('这里执行两次');
+            })
+
+        </script>
+
+    </head>
+    <body ms-controller="test">
+        <p ms-if="toggle">{{text}} </p>
+        <button type="button" ms-on-click="click">点我{{toggle ?  '隐藏' : "显示"}}</button>
+    </body>
+</html>

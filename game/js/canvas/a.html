@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+	<script src="PCImage.js"></script>
+	</head>
+	<body>
+		<canvas id="canvas"></canvas>
+		<script>
+var width = 500;
+var height = 500;
+var canvas = document.querySelector('#canvas');
+canvas.width = width;
+canvas.height = height;
+var context = canvas.getContext('2d');
+
+context.fillStyle = '#ff99aa';
+// context.font = '20px _sans';
+// context.textBaseline = 'top';
+// context.fillText('Hello World!', 100, 100);
+context.fillRect(0, 0, width, height);
+
+var img = new PCImage('./ship.jpg', function (img) {
+	context.drawImage(img, 0, -20);
+	context.drawImage(img, 0, 34, 32, 32);
+	context.drawImage(img, 0, 68, 64, 64);
+	context.drawImage(img, 0, 140, 16, 16);
+	context.drawImage(img, 5, 5, 32, 50, 0, 160, 32, 32);
+
+	var step = 0;
+	var total = 10;
+	var part = 32 / total;
+	var up = true;
+	setInterval(function() {
+		step++;
+		step = step % total;
+		if(step == 0) up = !up;
+		context.clearRect(0, 200, 32, 32);
+		context.drawImage(img, 0, up ? (step * part) : (step*part -32), 32, 32, 0, 200, 32, 32);
+	}, 33);
+});
+		</script>
+	</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ms-css</title>
+		<meta charset="utf8">
+		<script src="http://www.peichao01.com/static_content/ctrip/script/lib/avalon.js"></script>
+		<script>
+		avalon.define('helloworld', function (vm) {
+			vm.text = 'Hello World';
+			vm.alert = function () {
+				vm.text = 'Good Bye';
+			};
+		});
+		</script>
+	</head>
+	<body>
+		<div ms-controller="helloworld">
+			<h3 ms-click="alert">He say {{text}} !!!</h3>
+		</div>
+	</body>
+</html>
