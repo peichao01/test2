@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>KISSY plugins</title>
+		<script src="http://g.tbcdn.cn/kissy/k/1.4.3/seed-min.js"></script>
+		<!--
+		<script src="history.js"></script>
+		<script src="router.js"></script>
+		-->
+		<script>
+		KISSY.config({
+			base: './',
+			debug: true,
+			modules:{
+				'mvvm': {
+					path: './lib/mvvm.js'//,
+					// alias: 'mvvm'
+				}
+			}
+		});
+		</script>
+		<script src="./app.js"></script>
+	</head>
+	<body>
+		<div tm-controller="app">
+			<div>{{name}}</div>
+			<input tm-duplex="name">
+			<div tm-repeat="views"></div>
+		</div>
+	</body>
+</html>

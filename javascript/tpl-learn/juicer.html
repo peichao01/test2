@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+	<head>
+		<script src="http://www.peichao01.com/static_content/ctrip/script/lib/juicer.js"></script>
+	</head>
+	<body>
+		<script type="text/juicer" id="tpl">
+<ul>
+	{@each list as it,k}
+		<li>${it.name} (index: ${k})</li>
+	{@/each}
+	{@each blah as it}
+		<li>
+			num: ${it.num} <br />
+			{@if it.num==3}
+				{@each it.inner as it2}
+					${it2.time} <br />
+				{@/each}
+			{@/if}
+		</li>
+	{@/each}
+</ul>
+		</script>
+		<script>
+var data={
+	list:[
+		{name:'guokai',show:true},
+		{name:'benben',show:false},
+		{name:'dierbaby',show:true}
+	],
+	blah:[
+		{num:1},
+		{num:2},
+		{num:3,inner:[
+			{'time':'15:00'},
+			{'time':'16:00'},
+			{'time':'17:00'},
+			{'time':'18:00'}
+		]},
+		{num:4}
+	]
+};
+var tpl = document.querySelector('#tpl').innerText;
+var r = juicer(tpl, data);
+console.log(r);
+		</script>
+	</body>
+</html>

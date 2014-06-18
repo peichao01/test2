@@ -1,0 +1,10 @@
+<script>
+var obj = {foo: 'bar'};
+var proxyObj = Proxy.create({
+	get: function (obj, propertyName) {
+		// console.log(obj);
+		return 'Hey, ' + propertyName;
+	}
+});
+console.log(proxyObj.Alex);
+</script>

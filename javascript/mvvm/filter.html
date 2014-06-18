@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>ms-css</title>
+		<meta charset="utf8">
+		<meta name="fragment" content="!">
+		<style type="text/css" rel="stylesheet">
+		[ms-controller],[ms-important],.ms-controller,.ms-important{
+		     display:none;
+		 }
+		</style>
+		<script src="http://www.peichao01.com/static_content/ctrip/script/lib/avalon/avalon.mobile.js"></script>
+		<!--
+		<script src="http://www.peichao01.com/static_content/ctrip/script/lib/avalon-plug/mmRouter.js"></script>
+		-->
+		<script>
+		avalon.ready(function () {
+			avalon.define('ttt', function () {
+				
+			});
+			avalon.scan();
+		});
+		</script>
+	</head>
+	<body>
+		<div ms-controller="ttt">
+			{{'&lt;div&gt;aa&lt;/div&gt;'|uppercase|html}}
+		</div>
+	</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		
+	</head>
+	<body>
+<script type="text/tpl" id="tpl">
+<h3>hello</h3>
+<div>
+	<% if(typeof content === 'string') { %>
+		Hi,
+		<%= content %>
+	<% } %>
+</div>
+</script>
+<script>
+var tpl = document.getElementById('tpl').innerText;
+function _tokenize (str) {
+	for(var i = 0, len = tpl.length; i < len; i++){
+		var chr = tpl.charAt(i);
+		// if()
+	}
+}
+_tokenize(tpl);
+</script>
+	</body>
+</html>

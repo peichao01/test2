@@ -1,0 +1,59 @@
+<script src="http://www.peichao01.com/static_content/ctrip/script/lib/watch.js"></script>
+<script>
+var ex1 = {
+	attr1: 'initial value of attr1',
+	attr2: 'initial value of attr2',
+	arr: [1, 2, 3]
+};
+
+watch(ex1, 'attr1', function (property, type, newValue, oldValue) {
+	console.log(property, type, newValue, oldValue);
+});
+
+watch(ex1, 'arr', function (property, type, newValue, oldValue) {
+	console.log(property, type, newValue, oldValue);
+});
+
+// ex1.attr1 = 'other value';
+// ex1.arr.pop();
+// ex1.arr = [2,3,4];
+
+
+var ex2 = {
+	attr1: 0,
+	attr2: 0,
+	attr3: 0
+};
+
+watch(ex2, ['attr2', 'attr3'], function (property, type, newValue, oldValue) {
+	console.log(property, type, newValue, oldValue);
+});
+
+// ex2.attr2 = 50;
+
+console.log('====================================');
+
+var ex3 = {
+	attr1: 0,
+	attr2: 'initial value of attr2',
+	attr3: ['a', 3, null]
+};
+
+watch(ex3, function (property, type, newValue, oldValue) {
+	// window.attr3 = newValue;
+	// console.log(property, type, newValue, oldValue);
+	// WatchJS.noMore = true;
+	// ex3.attr2 = ex3.attr1 + ' + 1';
+});
+watch(ex3, function (property, type, newValue, oldValue) {
+	// window.attr3 = newValue;
+	console.log(property, type, newValue, oldValue);
+});
+
+watch(ex3, function (property, type, newValue, oldValue) {});
+watch(ex3, function (property, type, newValue, oldValue) {});
+
+ex3.attr3.push('new value');
+// ex3.attr3.pop();
+// ex3.attr3.splice(1, 2);
+</script>

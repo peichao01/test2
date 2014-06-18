@@ -1,0 +1,66 @@
+<script src="http://www.peichao01.com/static_content/ctrip/script/lib/watch.js"></script>
+<script>
+//===============================================// part 1
+var ex1 = {
+	b: ['b']
+};
+watch(ex1, 'b', function (property, action) {});
+watch(ex1, 'b', function (property, action) {
+	console.log('ex1 2, ', action);
+});
+ex1.b.push('b2'); // => any method except 'splice' will call every callback [callbacks.length] times
+// ex1.b.pop();// => here will generate a Uncaught error: "Uncaught TypeError: Cannot read property 'call' of undefined"
+
+//===============================================// part 2
+var ex1 = {
+	b: ['b']
+};
+watch(ex1, 'b', function (property, action) {});
+watch(ex1, 'b', function (property, action) {
+	console.log('ex1 2, ', action);
+});
+ex1.b.shift('b1');// if here shift then unshift, the pop will not error;
+ex1.b.unshift(); // if only unshift, will error too, because this was be invoked more than once.
+ex1.b.push('b2');
+ex1.b.pop();
+//===============================================// part 3
+var ex1 = {
+	a: 'a',
+	b: ['b']
+};
+watch(ex1, 'a', function () {});
+watch(ex1, 'a', function () {
+	console.log('ex1 1');
+});
+watch(ex1, 'b', function (property, action) {});
+watch(ex1, 'b', function (property, action) {
+	console.log('ex1 2, ', action);
+});
+ex1.a = 'a1';
+ex1.b.shift('b0');
+ex1.b.unshift();
+ex1.b.push('b2');
+ex1.b.pop();
+
+//===============================================// part 4
+var ex3 = {
+	attr1: 0,
+	attr2: 'initial value of attr2',
+	attr3: ['a', 3, null]
+};
+
+watch(ex3, function (property, type, newValue, oldValue) {
+	WatchJS.noMore = true;
+	ex3.attr2 = ex3.attr1 + ' + 1';
+});
+watch(ex3, function (property, type, newValue, oldValue) {
+	// console.log(property, type, newValue, oldValue);
+	console.log('2');
+});
+watch(ex3, function (property, type, newValue, oldValue) {
+	console.log('3');
+});
+watch(ex3, function (property, type, newValue, oldValue) {});
+
+ex3.attr3.push('new value');
+</script>
