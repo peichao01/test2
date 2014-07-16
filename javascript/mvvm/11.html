@@ -1,0 +1,38 @@
+<div ms-controller="ttt">
+	<p>{{name}}</p>
+	<ul>
+		<li ms-repeat="lists">{{el}}</li>
+	</ul>
+	<ul>
+		<li ms-repeat="o.arr">{{el}}</li>
+	</ul>
+	<ol>
+		<li ms-repeat="o">{{$key}} - {{$val}}</li>
+	</ol>
+	<button ms-on-click="step1">step1</button>
+	<button ms-on-click="step2">step2</button>
+</div>
+<script src="http://www.peichao01.com/static_content/ctrip/script/lib/avalon/avalon.js"></script>
+<script>
+var m = avalon.define('ttt', function (vm) {
+	vm.lists = [1, 2, 3];
+	// setTimeout(function () {
+	// 	vm.name = 'Alexander';
+	// }, 500);
+	vm.o = {name:'David', age: 27, arr: [11, 12, 13]};
+	vm.step1 = function () {
+		vm.o.color = 'yellow';
+		vm.o.name = 'Alexander';
+
+		vm.lists.push(vm.lists.length + 1);
+		// vm.lists[4] = 5;
+	};
+
+	vm.step2 = function () {
+		vm.o = {color:'yellow'};
+	};
+});
+setTimeout(function () {
+	m.o.color = 'yellow';
+}, 500);
+</script>

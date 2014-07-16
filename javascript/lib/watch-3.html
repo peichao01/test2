@@ -1,0 +1,14 @@
+<script src="http://www.peichao01.com/static_content/ctrip/script/lib/watch.js"></script>
+<script>
+var o = {
+	name: 'David',
+	age: 27,
+	hair: [1,2,3]
+};
+WatchJS.watch(o, function (property, action, newValue, oldValue) {
+	console.log(property, action, newValue, oldValue);
+}, 10, true);
+o.name = 'Alexander';
+// o.color = 'yellow';
+delete o.age;
+</script>

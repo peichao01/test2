@@ -1,0 +1,24 @@
+<script src="http://www.peichao01.com/static_content/ctrip/script/lib/watch.js"></script>
+<script>
+var Apple = function (type) {
+	var _thisApple = this;
+	this.type = type;
+	this.color = 'red';
+
+	this.getInfo = function () {
+		return this.color + ' ' + this.type + ' apple';
+	};
+
+	watch(this, function (a, b, c, d) {
+		console.log("===========================");
+		console.log(a, b, c, d);
+        for(var i in _thisApple){
+            console.log(i+": "+_thisApple[i]);
+        }
+        console.log("===========================");
+	});
+}
+
+var apple = new Apple('macintosh');
+apple.type = 'other';
+</script>

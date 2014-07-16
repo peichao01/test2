@@ -1,0 +1,33 @@
+<script src="http://www.peichao01.com/static_content/ctrip/script/lib/watch.js"></script>
+<script>
+var ex = {
+	l1a: 'bla bla',
+	l1b: {
+		l2a: 'lo lo',
+		l2b: {
+			deeper: 'so deep'
+		}
+	}
+};
+
+watch(ex, function (property, action, newValue, oldValue) {
+	console.log([property, action, newValue, oldValue].join(' --- '));
+}, 1);
+
+watch(ex, function (property, action, newValue, oldValue) {
+	console.log([property, action, newValue, oldValue].join(' --- '));
+}, 2);
+
+// ex.l1b.l2b.deeper = 'other value';
+ex.l1b.l2b = 'other value';
+
+
+var ex7 = {
+	attr1: 0,
+	attr2: 1
+};
+watch(ex7, function (a, b, c, d) {
+	console.log(a, b, c, d);
+});
+callWatchers(ex7, 'attr1');
+</script>
